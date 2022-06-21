@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from './../environments/environment';
 import { AppInterface } from './app.interface';
 
@@ -8,38 +8,19 @@ import { AppInterface } from './app.interface';
   providedIn: 'root',
 })
 export class AppService {
+  env = environment;
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
   });
   constructor(public httpClient: HttpClient) {}
 
-  // Promises
-  getPromiseTable() {
-    return this.httpClient.get(`${environment.api}/tabela`);
+  getNomes(nome?: string): Observable<AppInterface[]> {
+    const params = nome
+      ? new HttpParams().append('nome_like', nome)
+      : undefined;
+
+    return this.httpClient
+      .get<AppInterface[]>(`${this.env.api}/nomes`, { params: params })
+      .pipe(tap((valor) => console.log(valor)));
   }
-
-  postPromiseTable(item: AppInterface) {
-    return this.httpClient.post(`${environment.api}/tabela`, item, {
-      headers: this.headers,
-    });
-  }
-
-  putPromiseTable(item: AppInterface) {
-    return this.httpClient.put(`${environment.api}/tabela/${item.id}`, item, {
-      headers: this.headers,
-    });
-  }
-
-  deletePromiseTable() {}
-
-  // Observables
-  getObservableTable(): Observable<AppInterface[]> {
-    return this.httpClient.get<AppInterface[]>(`${environment.api}/tabela`);
-  }
-
-  postObservableTable() {}
-
-  putObservableTable() {}
-
-  deleteObservableTable() {}
 }

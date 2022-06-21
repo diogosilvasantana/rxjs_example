@@ -7,45 +7,26 @@
 <section>
   <mat-grid-list cols="2" rowHeight="2:2">
     <mat-grid-tile>
-      <table>
+      <table *ngIf="nomes$ | async as nomes">
         <tr>
           <th>ID</th>
           <th>NOME</th>
           <th>DATA NASCIMENTO</th>
-          <th>AÇÕES</th>
         </tr>
-        <tr *ngFor="let item of dataSource$ | async">
+        <tr *ngFor="let item of nomes">
           <td>{{ item.id }}</td>
           <td>{{ item.nome }}</td>
           <td>{{ item.nascimento }}</td>
-          <td>
-            <button mat-stroked-button (click)="editItem(item)">Editar</button>
-          </td>
         </tr>
       </table>
-
-      <button class="button-new" mat-stroked-button (click)="newItem()">
-        Adicionar Novo
-      </button>
     </mat-grid-tile>
 
     <mat-grid-tile>
-      <!-- <table>
-        <tr>
-          <th>ID</th>
-          <th>NOME</th>
-          <th>DATA NASCIMENTO</th>
-          <th>AÇÕES</th>
-        </tr>
-        <tr *ngFor="let item of dataSource$ | async">
-          <td>{{ item.id }}</td>
-          <td>{{ item.nome }}</td>
-          <td>{{ item.nascimento }}</td>
-          <td>
-            <button mat-stroked-button (click)="editItem(item)">Editar</button>
-          </td>
-        </tr>
-      </table> -->
+      <h1>Filtrar Nomes</h1>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput type="text" [formControl]="filtrarNomeInput" />
+      </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
 </section>
