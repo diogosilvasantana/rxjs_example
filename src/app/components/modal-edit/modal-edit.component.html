@@ -1,0 +1,17 @@
+<section>
+  <h1 mat-dialog-title>Editar</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="formValue">
+      <p>Nome</p>
+      <input matInput formControlName="nome" />
+      <p>Data de Nascimento</p>
+      <input matInput formControlName="nascimento" />
+    </form>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button mat-stroked-button (click)="onNoClick()">Fechar</button>
+    <button mat-stroked-button color="primary" (click)="onSave()">
+      Salvar
+    </button>
+  </div>
+</section>

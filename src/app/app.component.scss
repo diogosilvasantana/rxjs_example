@@ -1,0 +1,32 @@
+section {
+    margin: 2em auto;  	
+	width: 80%;  	
+	background: #fff;
+}
+
+mat-grid-tile {
+
+    ::ng-deep.mat-grid-tile-content {
+        display: block!important;
+
+        .button-new {
+            margin: 10px 0;
+        }
+    }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid #bdbdbd;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #e6e5e5;
+      }
+  }
